@@ -1,0 +1,11 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "Report",
+    "displayName": "Fact.Stock Holding"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "dba95ea3-da1b-41bc-96ed-f49192455094"
+  }
+}
