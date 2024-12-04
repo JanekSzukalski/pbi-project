@@ -4,23 +4,10 @@
     {
       "ordinal": 0,
       "scrollPosition": {
-        "x": 201.12331889399098,
-        "y": 263.8954399226244
+        "x": 0,
+        "y": 298.66813622982232
       },
       "nodes": [
-        {
-          "location": {
-            "x": 1016.7564052822172,
-            "y": 695.48151239951653
-          },
-          "nodeIndex": "Dim.City",
-          "nodeLineageTag": "c6b55c38-adec-498d-82da-b0135a426de6",
-          "size": {
-            "height": 300,
-            "width": 234
-          },
-          "zIndex": 0
-        },
         {
           "location": {
             "x": 218.38817380218831,
@@ -41,19 +28,6 @@
           },
           "nodeIndex": "Dim.Stock_Item",
           "nodeLineageTag": "cd07a76e-11a6-4a92-8b4a-f9502fbf9a56",
-          "size": {
-            "height": 300,
-            "width": 234
-          },
-          "zIndex": 0
-        },
-        {
-          "location": {
-            "x": 1017.7150095083325,
-            "y": 256.05480255460742
-          },
-          "nodeIndex": "Dim.Supplier",
-          "nodeLineageTag": "35bd9b7b-d008-453c-85d0-0292ff323a96",
           "size": {
             "height": 300,
             "width": 234
