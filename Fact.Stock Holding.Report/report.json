@@ -1,5 +1,6 @@
 {
-  "config": "{\"version\":\"5.59\",\"themeCollection\":{\"baseTheme\":{\"name\":\"CY24SU10\",\"version\":\"5.60\",\"type\":2}},\"activeSectionIndex\":0,\"defaultDrillFilterOtherVisuals\":true,\"linguisticSchemaSyncVersion\":2,\"settings\":{\"useNewFilterPaneExperience\":true,\"allowChangeFilterTypes\":true,\"useStylableVisualContainerHeader\":true,\"queryLimitOption\":6,\"exportDataMode\":1,\"useDefaultAggregateDisplayName\":true,\"useEnhancedTooltips\":true},\"objects\":{\"section\":[{\"properties\":{\"verticalAlignment\":{\"expr\":{\"Literal\":{\"Value\":\"'Top'\"}}}}}]}}",
+  "config": "{\"version\":\"5.59\",\"themeCollection\":{\"baseTheme\":{\"name\":\"CY24SU10\",\"version\":\"5.60\",\"type\":2}},\"activeSectionIndex\":0,\"defaultDrillFilterOtherVisuals\":true,\"filterSortOrder\":3,\"linguisticSchemaSyncVersion\":2,\"settings\":{\"useNewFilterPaneExperience\":true,\"allowChangeFilterTypes\":true,\"useStylableVisualContainerHeader\":true,\"queryLimitOption\":6,\"exportDataMode\":1,\"useDefaultAggregateDisplayName\":true,\"useEnhancedTooltips\":true,\"filterPaneHiddenInEditMode\":false},\"objects\":{\"section\":[{\"properties\":{\"verticalAlignment\":{\"expr\":{\"Literal\":{\"Value\":\"'Top'\"}}}}}]}}",
+  "filters": "[]",
   "layoutOptimization": 0,
   "resourcePackages": [
     {
@@ -15,17 +16,146 @@
         "name": "SharedResources",
         "type": 2
       }
+    },
+    {
+      "resourcePackage": {
+        "disabled": false,
+        "items": [
+          {
+            "name": "logo8003495375556806.png",
+            "path": "logo8003495375556806.png",
+            "type": 100
+          }
+        ],
+        "name": "RegisteredResources",
+        "type": 1
+      }
     }
   ],
   "sections": [
     {
       "config": "{}",
-      "displayName": "Strona 1",
+      "displayName": "product_location",
+      "displayOption": 1,
+      "filters": "[]",
+      "height": 720.00,
+      "name": "123b371540a439477966",
+      "ordinal": 1,
+      "visualContainers": [
+        {
+          "config": "{\"name\":\"1c2cb26cc46eccc1ec49\",\"layouts\":[{\"id\":0,\"position\":{\"x\":0,\"y\":74.09973366388047,\"z\":1,\"width\":141.33838087740165,\"height\":67.23864721352116,\"tabOrder\":1}}],\"singleVisual\":{\"visualType\":\"slicer\",\"projections\":{\"Values\":[{\"queryRef\":\"Dim.Category.Category\",\"active\":true}]},\"prototypeQuery\":{\"Version\":2,\"From\":[{\"Name\":\"c\",\"Entity\":\"Dim.Category\",\"Type\":0}],\"Select\":[{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"c\"}},\"Property\":\"Category\"},\"Name\":\"Dim.Category.Category\",\"NativeReferenceName\":\"Category\"}]},\"syncGroup\":{\"groupName\":\"Category\",\"fieldChanges\":true,\"filterChanges\":true},\"drillFilterOtherVisuals\":true,\"objects\":{\"data\":[{\"properties\":{\"mode\":{\"expr\":{\"Literal\":{\"Value\":\"'Dropdown'\"}}}}}],\"general\":[{\"properties\":{\"orientation\":{\"expr\":{\"Literal\":{\"Value\":\"0D\"}}}}}],\"selection\":[{\"properties\":{\"selectAllCheckboxEnabled\":{\"expr\":{\"Literal\":{\"Value\":\"true\"}}}}}]}}}",
+          "filters": "[]",
+          "height": 67.24,
+          "width": 141.34,
+          "x": 0.00,
+          "y": 74.10,
+          "z": 1.00
+        },
+        {
+          "config": "{\"name\":\"1c3fc8fd284a8bd99d40\",\"layouts\":[{\"id\":0,\"position\":{\"x\":0,\"y\":141.33838087740165,\"z\":2,\"width\":141.33838087740165,\"height\":149.5716846178328,\"tabOrder\":2}}],\"singleVisual\":{\"visualType\":\"slicer\",\"projections\":{\"Values\":[{\"queryRef\":\"Fact.Stock_Holding.Quantity On Hand\",\"active\":true}]},\"prototypeQuery\":{\"Version\":2,\"From\":[{\"Name\":\"s\",\"Entity\":\"Fact.Stock_Holding\",\"Type\":0}],\"Select\":[{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"s\"}},\"Property\":\"Quantity On Hand\"},\"Name\":\"Fact.Stock_Holding.Quantity On Hand\",\"NativeReferenceName\":\"Quantity On Hand\"}]},\"syncGroup\":{\"groupName\":\"Quantity On Hand\",\"fieldChanges\":true,\"filterChanges\":true},\"drillFilterOtherVisuals\":true,\"objects\":{\"data\":[{\"properties\":{\"mode\":{\"expr\":{\"Literal\":{\"Value\":\"'Between'\"}}}}}],\"slider\":[{\"properties\":{\"show\":{\"expr\":{\"Literal\":{\"Value\":\"true\"}}}}}]}}}",
+          "filters": "[]",
+          "height": 149.57,
+          "width": 141.34,
+          "x": 0.00,
+          "y": 141.34,
+          "z": 2.00
+        },
+        {
+          "config": "{\"name\":\"88bfa3e061a805e2b08c\",\"layouts\":[{\"id\":0,\"position\":{\"x\":0,\"y\":0,\"z\":0,\"width\":141.33838087740165,\"height\":74.09973366388047,\"tabOrder\":0}}],\"singleVisual\":{\"visualType\":\"slicer\",\"projections\":{\"Values\":[{\"queryRef\":\"Fact.Stock_Holding.Bin Location\",\"active\":true}]},\"prototypeQuery\":{\"Version\":2,\"From\":[{\"Name\":\"s\",\"Entity\":\"Fact.Stock_Holding\",\"Type\":0}],\"Select\":[{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"s\"}},\"Property\":\"Bin Location\"},\"Name\":\"Fact.Stock_Holding.Bin Location\",\"NativeReferenceName\":\"Bin Location\"}]},\"expansionStates\":[{\"roles\":[\"Values\"],\"levels\":[{\"queryRefs\":[\"Fact.Stock_Holding.Bin Location\"],\"isCollapsed\":true,\"identityKeys\":[{\"Column\":{\"Expression\":{\"SourceRef\":{\"Entity\":\"Fact.Stock_Holding\"}},\"Property\":\"Bin Location\"}}],\"isPinned\":true}],\"root\":{\"identityValues\":null}}],\"syncGroup\":{\"groupName\":\"Bin Location\",\"fieldChanges\":true,\"filterChanges\":true},\"drillFilterOtherVisuals\":true,\"objects\":{\"data\":[{\"properties\":{\"mode\":{\"expr\":{\"Literal\":{\"Value\":\"'Dropdown'\"}}}}}],\"general\":[{\"properties\":{\"orientation\":{\"expr\":{\"Literal\":{\"Value\":\"1D\"}}}}}],\"selection\":[{\"properties\":{\"selectAllCheckboxEnabled\":{\"expr\":{\"Literal\":{\"Value\":\"true\"}}}}}]}}}",
+          "filters": "[{\"name\":\"61db18b00d671699833a\",\"expression\":{\"Column\":{\"Expression\":{\"SourceRef\":{\"Entity\":\"Fact.Stock_Holding\"}},\"Property\":\"Bin Location\"}},\"type\":\"Categorical\",\"howCreated\":0,\"objects\":{\"general\":[{\"properties\":{\"isInvertedSelectionMode\":{\"expr\":{\"Literal\":{\"Value\":\"true\"}}}}}]},\"isHiddenInViewMode\":false}]",
+          "height": 74.10,
+          "width": 141.34,
+          "x": 0.00,
+          "y": 0.00,
+          "z": 0.00
+        }
+      ],
+      "width": 1280.00
+    },
+    {
+      "config": "{}",
+      "displayName": "details",
+      "displayOption": 1,
+      "filters": "[]",
+      "height": 720.00,
+      "name": "f744af0790d3c8c65863",
+      "ordinal": 2,
+      "visualContainers": [
+        {
+          "config": "{\"name\":\"460d0d9cab919130a20e\",\"layouts\":[{\"id\":0,\"position\":{\"x\":0,\"y\":0,\"z\":0,\"width\":141.33838087740165,\"height\":74.09973366388047,\"tabOrder\":0}}],\"singleVisual\":{\"visualType\":\"slicer\",\"projections\":{\"Values\":[{\"queryRef\":\"Fact.Stock_Holding.Bin Location\",\"active\":true}]},\"prototypeQuery\":{\"Version\":2,\"From\":[{\"Name\":\"s\",\"Entity\":\"Fact.Stock_Holding\",\"Type\":0}],\"Select\":[{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"s\"}},\"Property\":\"Bin Location\"},\"Name\":\"Fact.Stock_Holding.Bin Location\",\"NativeReferenceName\":\"Bin Location\"}]},\"expansionStates\":[{\"roles\":[\"Values\"],\"levels\":[{\"queryRefs\":[\"Fact.Stock_Holding.Bin Location\"],\"isCollapsed\":true,\"identityKeys\":[{\"Column\":{\"Expression\":{\"SourceRef\":{\"Entity\":\"Fact.Stock_Holding\"}},\"Property\":\"Bin Location\"}}],\"isPinned\":true}],\"root\":{\"identityValues\":null}}],\"syncGroup\":{\"groupName\":\"Bin Location\",\"fieldChanges\":true,\"filterChanges\":true},\"drillFilterOtherVisuals\":true,\"objects\":{\"data\":[{\"properties\":{\"mode\":{\"expr\":{\"Literal\":{\"Value\":\"'Dropdown'\"}}}}}],\"general\":[{\"properties\":{\"orientation\":{\"expr\":{\"Literal\":{\"Value\":\"1D\"}}}}}],\"selection\":[{\"properties\":{\"selectAllCheckboxEnabled\":{\"expr\":{\"Literal\":{\"Value\":\"true\"}}}}}]}}}",
+          "filters": "[{\"name\":\"61db18b00d671699833a\",\"expression\":{\"Column\":{\"Expression\":{\"SourceRef\":{\"Entity\":\"Fact.Stock_Holding\"}},\"Property\":\"Bin Location\"}},\"type\":\"Categorical\",\"howCreated\":0,\"objects\":{\"general\":[{\"properties\":{\"isInvertedSelectionMode\":{\"expr\":{\"Literal\":{\"Value\":\"true\"}}}}}]},\"isHiddenInViewMode\":false}]",
+          "height": 74.10,
+          "width": 141.34,
+          "x": 0.00,
+          "y": 0.00,
+          "z": 0.00
+        },
+        {
+          "config": "{\"name\":\"d73b663760a8c9b0d6e7\",\"layouts\":[{\"id\":0,\"position\":{\"x\":0,\"y\":74.09973366388047,\"z\":1,\"width\":141.33838087740165,\"height\":67.23864721352116,\"tabOrder\":1}}],\"singleVisual\":{\"visualType\":\"slicer\",\"projections\":{\"Values\":[{\"queryRef\":\"Dim.Category.Category\",\"active\":true}]},\"prototypeQuery\":{\"Version\":2,\"From\":[{\"Name\":\"c\",\"Entity\":\"Dim.Category\",\"Type\":0}],\"Select\":[{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"c\"}},\"Property\":\"Category\"},\"Name\":\"Dim.Category.Category\",\"NativeReferenceName\":\"Category\"}]},\"syncGroup\":{\"groupName\":\"Category\",\"fieldChanges\":true,\"filterChanges\":true},\"drillFilterOtherVisuals\":true,\"objects\":{\"data\":[{\"properties\":{\"mode\":{\"expr\":{\"Literal\":{\"Value\":\"'Dropdown'\"}}}}}],\"general\":[{\"properties\":{\"orientation\":{\"expr\":{\"Literal\":{\"Value\":\"0D\"}}}}}],\"selection\":[{\"properties\":{\"selectAllCheckboxEnabled\":{\"expr\":{\"Literal\":{\"Value\":\"true\"}}}}}]}}}",
+          "filters": "[]",
+          "height": 67.24,
+          "width": 141.34,
+          "x": 0.00,
+          "y": 74.10,
+          "z": 1.00
+        },
+        {
+          "config": "{\"name\":\"f74d3c10a092a8c93ec3\",\"layouts\":[{\"id\":0,\"position\":{\"x\":0,\"y\":141.33838087740165,\"z\":2,\"width\":141.33838087740165,\"height\":149.5716846178328,\"tabOrder\":2}}],\"singleVisual\":{\"visualType\":\"slicer\",\"projections\":{\"Values\":[{\"queryRef\":\"Fact.Stock_Holding.Quantity On Hand\",\"active\":true}]},\"prototypeQuery\":{\"Version\":2,\"From\":[{\"Name\":\"s\",\"Entity\":\"Fact.Stock_Holding\",\"Type\":0}],\"Select\":[{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"s\"}},\"Property\":\"Quantity On Hand\"},\"Name\":\"Fact.Stock_Holding.Quantity On Hand\",\"NativeReferenceName\":\"Quantity On Hand\"}]},\"syncGroup\":{\"groupName\":\"Quantity On Hand\",\"fieldChanges\":true,\"filterChanges\":true},\"drillFilterOtherVisuals\":true,\"objects\":{\"data\":[{\"properties\":{\"mode\":{\"expr\":{\"Literal\":{\"Value\":\"'Between'\"}}}}}],\"slider\":[{\"properties\":{\"show\":{\"expr\":{\"Literal\":{\"Value\":\"true\"}}}}}]}}}",
+          "filters": "[]",
+          "height": 149.57,
+          "width": 141.34,
+          "x": 0.00,
+          "y": 141.34,
+          "z": 2.00
+        }
+      ],
+      "width": 1280.00
+    },
+    {
+      "config": "{}",
+      "displayName": "stock level",
       "displayOption": 1,
       "filters": "[]",
       "height": 720.00,
       "name": "f93c535b814630782422",
-      "visualContainers": [],
+      "visualContainers": [
+        {
+          "config": "{\"name\":\"58975ae88366e677a137\",\"layouts\":[{\"id\":0,\"position\":{\"x\":0,\"y\":231.90472202214443,\"z\":1,\"width\":141.33838087740165,\"height\":67.23864721352116,\"tabOrder\":1}}],\"singleVisual\":{\"visualType\":\"slicer\",\"projections\":{\"Values\":[{\"queryRef\":\"Dim.Category.Category\",\"active\":true}]},\"prototypeQuery\":{\"Version\":2,\"From\":[{\"Name\":\"c\",\"Entity\":\"Dim.Category\",\"Type\":0}],\"Select\":[{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"c\"}},\"Property\":\"Category\"},\"Name\":\"Dim.Category.Category\",\"NativeReferenceName\":\"Category\"}]},\"syncGroup\":{\"groupName\":\"Category\",\"fieldChanges\":true,\"filterChanges\":true},\"drillFilterOtherVisuals\":true,\"objects\":{\"data\":[{\"properties\":{\"mode\":{\"expr\":{\"Literal\":{\"Value\":\"'Dropdown'\"}}}}}],\"general\":[{\"properties\":{\"orientation\":{\"expr\":{\"Literal\":{\"Value\":\"0D\"}}}}}],\"selection\":[{\"properties\":{\"selectAllCheckboxEnabled\":{\"expr\":{\"Literal\":{\"Value\":\"true\"}}}}}]}}}",
+          "filters": "[]",
+          "height": 67.24,
+          "width": 141.34,
+          "x": 0.00,
+          "y": 231.90,
+          "z": 1.00
+        },
+        {
+          "config": "{\"name\":\"852751102ca8bb019c62\",\"layouts\":[{\"id\":0,\"position\":{\"x\":0,\"y\":299.1433692356656,\"z\":4,\"width\":141.33838087740165,\"height\":149.5716846178328,\"tabOrder\":4}}],\"singleVisual\":{\"visualType\":\"slicer\",\"projections\":{\"Values\":[{\"queryRef\":\"Fact.Stock_Holding.Quantity On Hand\",\"active\":true}]},\"prototypeQuery\":{\"Version\":2,\"From\":[{\"Name\":\"s\",\"Entity\":\"Fact.Stock_Holding\",\"Type\":0}],\"Select\":[{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"s\"}},\"Property\":\"Quantity On Hand\"},\"Name\":\"Fact.Stock_Holding.Quantity On Hand\",\"NativeReferenceName\":\"Quantity On Hand\"}]},\"syncGroup\":{\"groupName\":\"Quantity On Hand\",\"fieldChanges\":true,\"filterChanges\":true},\"drillFilterOtherVisuals\":true,\"objects\":{\"data\":[{\"properties\":{\"mode\":{\"expr\":{\"Literal\":{\"Value\":\"'Between'\"}}}}}],\"slider\":[{\"properties\":{\"show\":{\"expr\":{\"Literal\":{\"Value\":\"true\"}}}}}]}}}",
+          "filters": "[]",
+          "height": 149.57,
+          "width": 141.34,
+          "x": 0.00,
+          "y": 299.14,
+          "z": 4.00
+        },
+        {
+          "config": "{\"name\":\"931db6c690d97a10cc56\",\"layouts\":[{\"id\":0,\"position\":{\"x\":0,\"y\":8,\"width\":150,\"height\":150,\"z\":3,\"tabOrder\":3}}],\"singleVisual\":{\"visualType\":\"image\",\"drillFilterOtherVisuals\":true,\"objects\":{\"general\":[{\"properties\":{\"imageUrl\":{\"expr\":{\"ResourcePackageItem\":{\"PackageName\":\"RegisteredResources\",\"PackageType\":1,\"ItemName\":\"logo8003495375556806.png\"}}}}}]}},\"howCreated\":\"InsertVisualButton\"}",
+          "filters": "[]",
+          "height": 150.00,
+          "width": 150.00,
+          "x": 0.00,
+          "y": 8.00,
+          "z": 3.00
+        },
+        {
+          "config": "{\"name\":\"bbe43aa59aa0830969dc\",\"layouts\":[{\"id\":0,\"position\":{\"x\":0,\"y\":157.80498835826396,\"z\":0,\"width\":141.33838087740165,\"height\":74.09973366388047,\"tabOrder\":0}}],\"singleVisual\":{\"visualType\":\"slicer\",\"projections\":{\"Values\":[{\"queryRef\":\"Fact.Stock_Holding.Bin Location\",\"active\":true}]},\"prototypeQuery\":{\"Version\":2,\"From\":[{\"Name\":\"s\",\"Entity\":\"Fact.Stock_Holding\",\"Type\":0}],\"Select\":[{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"s\"}},\"Property\":\"Bin Location\"},\"Name\":\"Fact.Stock_Holding.Bin Location\",\"NativeReferenceName\":\"Bin Location\"}]},\"expansionStates\":[{\"roles\":[\"Values\"],\"levels\":[{\"queryRefs\":[\"Fact.Stock_Holding.Bin Location\"],\"isCollapsed\":true,\"identityKeys\":[{\"Column\":{\"Expression\":{\"SourceRef\":{\"Entity\":\"Fact.Stock_Holding\"}},\"Property\":\"Bin Location\"}}],\"isPinned\":true}],\"root\":{\"identityValues\":null}}],\"syncGroup\":{\"groupName\":\"Bin Location\",\"fieldChanges\":true,\"filterChanges\":true},\"drillFilterOtherVisuals\":true,\"objects\":{\"data\":[{\"properties\":{\"mode\":{\"expr\":{\"Literal\":{\"Value\":\"'Dropdown'\"}}}}}],\"general\":[{\"properties\":{\"orientation\":{\"expr\":{\"Literal\":{\"Value\":\"1D\"}}}}}],\"selection\":[{\"properties\":{\"selectAllCheckboxEnabled\":{\"expr\":{\"Literal\":{\"Value\":\"true\"}}}}}]}}}",
+          "filters": "[{\"name\":\"61db18b00d671699833a\",\"expression\":{\"Column\":{\"Expression\":{\"SourceRef\":{\"Entity\":\"Fact.Stock_Holding\"}},\"Property\":\"Bin Location\"}},\"type\":\"Categorical\",\"howCreated\":0,\"objects\":{\"general\":[{\"properties\":{\"isInvertedSelectionMode\":{\"expr\":{\"Literal\":{\"Value\":\"true\"}}}}}]},\"isHiddenInViewMode\":false}]",
+          "height": 74.10,
+          "width": 141.34,
+          "x": 0.00,
+          "y": 157.80,
+          "z": 0.00
+        }
+      ],
       "width": 1280.00
     }
   ]
