@@ -1380,6 +1380,37 @@
           }
         ],
         "lineageTag": "7fab8090-6716-4b20-8854-c27324e9a84c",
+        "measures": [
+          {
+            "name": "TotalCostPricePerProduct",
+            "annotations": [
+              {
+                "name": "PBI_FormatHint",
+                "value": "{\"isGeneralNumber\":true}"
+              }
+            ],
+            "changedProperties": [
+              {
+                "property": "FormatString"
+              }
+            ],
+            "expression": [
+              "",
+              "SUM('Fact.Stock_Holding'[Last Cost Price]) * SUM('Fact.Stock_Holding'[Quantity On Hand])"
+            ],
+            "extendedProperties": [
+              {
+                "name": "MeasureTemplate",
+                "type": "json",
+                "value": {
+                  "daxTemplateName": "MathematicalMultiplication",
+                  "version": 0
+                }
+              }
+            ],
+            "lineageTag": "c4d4a570-74a0-4dc5-b434-4fa78589aaf9"
+          }
+        ],
         "partitions": [
           {
             "name": "Fact.Stock_Holding",
@@ -1454,6 +1485,34 @@
           }
         ],
         "lineageTag": "0222ad08-785b-4c2c-98f0-28c782309f8c",
+        "measures": [
+          {
+            "name": "ProductsBelowReorderLevel",
+            "expression": [
+              "",
+              "IF(",
+              "    SUM('Fact.Stock_Holding'[Quantity On Hand]) <= SUM('Fact.Stock_Holding'[Reorder Level]),",
+              "    1,",
+              "    0",
+              ")",
+              ""
+            ],
+            "formatString": "0",
+            "lineageTag": "04b777af-6367-4e61-8aa1-9bc1f29337ae"
+          },
+          {
+            "name": "ProductsAboveTargetLevel",
+            "expression": [
+              "IF(",
+              "    SUM('Fact.Stock_Holding'[Quantity On Hand]) >= SUM('Fact.Stock_Holding'[Target Stock Level]),",
+              "    1,",
+              "    0",
+              ")"
+            ],
+            "formatString": "0",
+            "lineageTag": "adccd474-05ee-4a1a-923c-517dd4d36231"
+          }
+        ],
         "partitions": [
           {
             "name": "Dim.Category",
