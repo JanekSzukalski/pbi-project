@@ -401,6 +401,12 @@
                 "column": "City",
                 "lineageTag": "f49a222b-e58c-490a-bc5a-2906569485fd",
                 "ordinal": 2
+              },
+              {
+                "name": "Subregion",
+                "column": "Subregion",
+                "lineageTag": "1362e978-d33d-40cd-b5d4-662950ebeb2f",
+                "ordinal": 3
               }
             ],
             "lineageTag": "c15911c9-d47a-4e28-8d8e-b7755ecf9c31"
@@ -2276,6 +2282,28 @@
             "expression": "DIVIDE([Sales - Target diff], [YTD Total Sales])",
             "formatString": "0.00%;-0.00%;0.00%",
             "lineageTag": "950a4b13-f264-4418-861d-df13bfaad6c6"
+          },
+          {
+            "name": "Total Gross Sales",
+            "annotations": [
+              {
+                "name": "PBI_FormatHint",
+                "value": "{\"isGeneralNumber\":true}"
+              }
+            ],
+            "expression": "SUM(FactSales[Total Including Tax])",
+            "lineageTag": "264e602f-7689-4de7-85fb-8930e1058008"
+          },
+          {
+            "name": "Total Tax",
+            "annotations": [
+              {
+                "name": "PBI_FormatHint",
+                "value": "{\"isGeneralNumber\":true}"
+              }
+            ],
+            "expression": "SUM(FactSales[Tax Amount])",
+            "lineageTag": "4cbe28e4-fb39-4710-9d1d-881a2f5fd494"
           }
         ],
         "partitions": [
