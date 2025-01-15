@@ -8,7 +8,7 @@
       },
       {
         "name": "PBIDesktopVersion",
-        "value": "2.138.1452.0 (24.11)"
+        "value": "2.137.1102.0 (24.10)"
       },
       {
         "name": "PBI_QueryOrder",
@@ -511,7 +511,7 @@
             "source": {
               "expression": [
                 "let",
-                "    Źródło = Sql.Databases(\"DESKTOP-FUKU640\\SQLEXPRESS\"),",
+                "    Źródło = Sql.Databases(\"localhost\"),",
                 "    WideWorldImportersDW = Źródło{[Name=\"WideWorldImportersDW\"]}[Data],",
                 "    Dimension_Date = WideWorldImportersDW{[Schema=\"Dimension\",Item=\"Date\"]}[Data],",
                 "    #\"Usunięto kolumny\" = Table.RemoveColumns(Dimension_Date,{\"Day\"})",
@@ -1028,7 +1028,7 @@
             "source": {
               "expression": [
                 "let",
-                "    Źródło = Sql.Databases(\"DESKTOP-FUKU640\\SQLEXPRESS\"),",
+                "    Źródło = Sql.Databases(\"localhost\"),",
                 "    WideWorldImportersDW = Źródło{[Name=\"WideWorldImportersDW\"]}[Data],",
                 "    #\"Dimension_Stock Item\" = WideWorldImportersDW{[Schema=\"Dimension\",Item=\"Stock Item\"]}[Data],",
                 "    #\"Usunięto pierwsze wiersze\" = Table.Skip(#\"Dimension_Stock Item\",1),",
@@ -1244,11 +1244,6 @@
       },
       {
         "name": "Fact.Stock_Holding",
-        "changedProperties": [
-          {
-            "property": "Name"
-          }
-        ],
         "columns": [
           {
             "name": "Stock Holding Key",
@@ -1293,7 +1288,7 @@
             "summarizeBy": "sum"
           },
           {
-            "name": "Bin Location",
+            "name": "Location",
             "annotations": [
               {
                 "name": "SummarizationSetBy",
@@ -1302,7 +1297,7 @@
             ],
             "dataType": "string",
             "lineageTag": "50039e14-c8fd-43a9-b7d1-6a0a14af9f92",
-            "sourceColumn": "Bin Location",
+            "sourceColumn": "Location",
             "summarizeBy": "none"
           },
           {
@@ -1337,7 +1332,7 @@
             "summarizeBy": "sum"
           },
           {
-            "name": "Reorder Level",
+            "name": "Reorder Level_",
             "annotations": [
               {
                 "name": "SummarizationSetBy",
@@ -1347,7 +1342,7 @@
             "dataType": "int64",
             "formatString": "0",
             "lineageTag": "3913bf4e-afa3-4aa8-adb1-168d71c93ac3",
-            "sourceColumn": "Reorder Level",
+            "sourceColumn": "Reorder Level_",
             "summarizeBy": "sum"
           },
           {
@@ -1409,6 +1404,30 @@
               }
             ],
             "lineageTag": "c4d4a570-74a0-4dc5-b434-4fa78589aaf9"
+          },
+          {
+            "name": "Current level",
+            "expression": "SUM('Fact.Stock_Holding'[Quantity On Hand]) ",
+            "formatString": "0",
+            "lineageTag": "8cd3dfc9-7d08-41b0-9eba-c7952cf047c0"
+          },
+          {
+            "name": "Inventory level",
+            "expression": "SUM('Fact.Stock_Holding'[Last Stocktake Quantity])",
+            "formatString": "0",
+            "lineageTag": "98fcae9e-3aac-4fbc-a00c-9de5c6456bcc"
+          },
+          {
+            "name": "Reorder level",
+            "expression": "SUM('Fact.Stock_Holding'[Reorder Level_]) ",
+            "formatString": "0",
+            "lineageTag": "0444aef0-66ac-4d57-809a-2d516a3f82b0"
+          },
+          {
+            "name": "Target level",
+            "expression": "SUM('Fact.Stock_Holding'[Target Stock Level])",
+            "formatString": "0",
+            "lineageTag": "d617a827-e105-488d-b73b-d92da925a5b1"
           }
         ],
         "partitions": [
@@ -1418,11 +1437,12 @@
             "source": {
               "expression": [
                 "let",
-                "    Źródło = Sql.Databases(\"DESKTOP-FUKU640\\SQLEXPRESS\"),",
+                "    Źródło = Sql.Databases(\"localhost\"),",
                 "    WideWorldImportersDW = Źródło{[Name=\"WideWorldImportersDW\"]}[Data],",
-                "    #\"Fact_Stock Holding\" = WideWorldImportersDW{[Schema=\"Fact\",Item=\"Stock Holding\"]}[Data]",
+                "    #\"Fact_Stock Holding\" = WideWorldImportersDW{[Schema=\"Fact\",Item=\"Stock Holding\"]}[Data],",
+                "    #\"Zmieniono nazwy kolumn\" = Table.RenameColumns(#\"Fact_Stock Holding\",{{\"Reorder Level\", \"Reorder Level_\"}, {\"Bin Location\", \"Location\"}})",
                 "in",
-                "    #\"Fact_Stock Holding\""
+                "    #\"Zmieniono nazwy kolumn\""
               ],
               "type": "m"
             }
@@ -1435,11 +1455,6 @@
           {
             "name": "PBI_ResultType",
             "value": "Table"
-          }
-        ],
-        "changedProperties": [
-          {
-            "property": "Name"
           }
         ],
         "columns": [
@@ -1491,7 +1506,7 @@
             "expression": [
               "",
               "IF(",
-              "    SUM('Fact.Stock_Holding'[Quantity On Hand]) <= SUM('Fact.Stock_Holding'[Reorder Level]),",
+              "    SUM('Fact.Stock_Holding'[Quantity On Hand]) <= SUM('Fact.Stock_Holding'[Reorder Level_]),",
               "    1,",
               "    0",
               ")",
@@ -1520,7 +1535,7 @@
             "source": {
               "expression": [
                 "let",
-                "    Źródło = Excel.Workbook(File.Contents(\"C:\\Users\\baadi\\OneDrive - Politechnika Łódzka\\st2\\sem3\\BI\\Lab - dane-20241009\\Dodatkowe dane\\Category_dictionary.xlsx\"), null, true),",
+                "    Źródło = Excel.Workbook(File.Contents(\"C:\\Users\\kubal\\Desktop\\Matma\\Wizualizacja danych i BI\\Dodatkowe dane\\Category_dictionary.xlsx\"), null, true),",
                 "    Arkusz1_Sheet = Źródło{[Item=\"Arkusz1\",Kind=\"Sheet\"]}[Data],",
                 "    #\"Nagłówki o podwyższonym poziomie\" = Table.PromoteHeaders(Arkusz1_Sheet, [PromoteAllScalars=true]),",
                 "    #\"Zmieniono typ\" = Table.TransformColumnTypes(#\"Nagłówki o podwyższonym poziomie\",{{\"WWI Stock Item ID\", Int64.Type}, {\"Description\", type text}, {\"Category\", type text}})",
@@ -1593,7 +1608,7 @@
             "source": {
               "expression": [
                 "let",
-                "    Źródło = Csv.Document(File.Contents(\"C:\\Users\\baadi\\OneDrive - Politechnika Łódzka\\st2\\sem3\\BI\\Lab - dane-20241009\\Dodatkowe dane\\Color Formats.csv\"),[Delimiter=\";\", Columns=3, Encoding=1250, QuoteStyle=QuoteStyle.None]),",
+                "    Źródło = Csv.Document(File.Contents(\"C:\\Users\\kubal\\Desktop\\Matma\\Wizualizacja danych i BI\\Dodatkowe dane\\Color Formats.csv\"),[Delimiter=\";\", Columns=3, Encoding=1250, QuoteStyle=QuoteStyle.None]),",
                 "    #\"Zmieniono typ\" = Table.TransformColumnTypes(Źródło,{{\"Column1\", type text}, {\"Column2\", type text}, {\"Column3\", type text}}),",
                 "    #\"Nagłówki o podwyższonym poziomie\" = Table.PromoteHeaders(#\"Zmieniono typ\", [PromoteAllScalars=true]),",
                 "    #\"Zmieniono typ1\" = Table.TransformColumnTypes(#\"Nagłówki o podwyższonym poziomie\",{{\"Color\", type text}, {\"Background Color Format\", type text}, {\"Font Color Format\", type text}})",
