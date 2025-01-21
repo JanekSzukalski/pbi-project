@@ -914,6 +914,21 @@
             "lineageTag": "bbd1a115-866f-445b-9085-8989ad7657ed",
             "sourceColumn": "ISO Week Number",
             "summarizeBy": "sum"
+          },
+          {
+            "name": "Quarter",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "expression": "\"Q\" & QUARTER(DimDate[Date])",
+            "isDataTypeInferred": true,
+            "lineageTag": "02bbff9d-5531-436d-9975-64ebfafb4d51",
+            "summarizeBy": "none",
+            "type": "calculated"
           }
         ],
         "dataCategory": "Time",
@@ -928,16 +943,22 @@
                 "ordinal": 0
               },
               {
+                "name": "Quarter",
+                "column": "Quarter",
+                "lineageTag": "d5d37add-c04e-4837-83b3-ed5db8a5a460",
+                "ordinal": 1
+              },
+              {
                 "name": "Month",
                 "column": "Month",
                 "lineageTag": "e20860f0-7589-4642-9c9f-97f327bef130",
-                "ordinal": 1
+                "ordinal": 2
               },
               {
                 "name": "Date",
                 "column": "Date",
                 "lineageTag": "fd52e4e6-7ed3-471d-85ba-80b79ad5596e",
-                "ordinal": 2
+                "ordinal": 3
               }
             ],
             "lineageTag": "3446cada-cfe7-4a25-993a-d6838daf443b"
@@ -2244,8 +2265,8 @@
             "lineageTag": "73df78fc-c689-4edb-9a91-14baac0dcb27"
           },
           {
-            "name": "Categorize",
-            "expression": "SWITCH(TRUE(), [Total Net Sales] > 10000, \"High\", [Total Net Sales] > 5000, \"Medium\", \"Low\")",
+            "name": "Categorize w.r.t. Sales",
+            "expression": "SWITCH(TRUE(), [Total Net Sales] > 10000000, \"Very High\", [Total Net Sales] > 1000000, \"High\", [Total Net Sales] > 500000, \"Medium\", \"Low\")",
             "lineageTag": "1ea1f6c1-8637-4fa0-908f-58470a354c00"
           },
           {
@@ -2310,6 +2331,56 @@
             "expression": "RANKX(ALL('DimCustomer'), [Total Profit], , DESC)",
             "formatString": "0",
             "lineageTag": "ef9bd926-7760-45ec-b494-9300caf5f76b"
+          },
+          {
+            "name": "Categorize w.r.t. Quantity",
+            "expression": "SWITCH(TRUE(), [Total Quantity] > 500000, \"Very High\", [Total Quantity] > 100000, \"High\", [Total Quantity] > 50000, \"Medium\", \"Low\")",
+            "lineageTag": "81661807-c7a6-4529-96ed-b1eb4a05d5ba"
+          },
+          {
+            "name": "Num of products",
+            "expression": "SUM(FactSales[Quantity])",
+            "formatString": "0",
+            "lineageTag": "eaa2b51d-209d-4c65-9422-5fa118ae53f6"
+          },
+          {
+            "name": "Products per transaction",
+            "annotations": [
+              {
+                "name": "PBI_FormatHint",
+                "value": "{\"isGeneralNumber\":true}"
+              }
+            ],
+            "expression": "SUM(FactSales[Quantity]) / COUNT(FactSales[Quantity])",
+            "lineageTag": "85a55ed9-e16d-4e22-a233-a786e8b11ef4"
+          },
+          {
+            "name": "Top Customer Name",
+            "expression": [
+              "",
+              "VAR TopCustomer =",
+              "    TOPN(1, ALL('DimCustomer'), [Total Profit], DESC)",
+              "RETURN",
+              "    MAXX(TopCustomer, 'DimCustomer'[Customer])"
+            ],
+            "lineageTag": "b0791c4f-79a9-491c-80b1-a861a729e013"
+          },
+          {
+            "name": "Top Customer Total Profit",
+            "annotations": [
+              {
+                "name": "PBI_FormatHint",
+                "value": "{\"isGeneralNumber\":true}"
+              }
+            ],
+            "expression": [
+              "",
+              "VAR TopCustomer =",
+              "    TOPN(1, ALL('DimCustomer'), [Total Profit], DESC)",
+              "RETURN",
+              "    MAXX(TopCustomer, [Total Profit])"
+            ],
+            "lineageTag": "b404c782-b4d7-4916-a086-1be693c14432"
           }
         ],
         "partitions": [
