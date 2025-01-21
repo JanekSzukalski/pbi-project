@@ -12,7 +12,7 @@
       },
       {
         "name": "PBIDesktopVersion",
-        "value": "2.137.1102.0 (24.10)"
+        "value": "2.138.1452.0 (24.11)"
       },
       {
         "name": "PBI_ProTooling",
@@ -53,7 +53,7 @@
         ],
         "expression": [
           "let",
-          "    Źródło = Csv.Document(File.Contents(\"C:\\Users\\kubal\\Desktop\\Matma\\Wizualizacja danych i BI\\Dodatkowe dane\\Color Formats.csv\"),[Delimiter=\";\", Columns=3, Encoding=1250, QuoteStyle=QuoteStyle.None]),",
+          "    Źródło = Csv.Document(File.Contents(\"C:\\Users\\janek\\OneDrive\\Pulpit\\PowerBI\\Project\\data\\Color Formats.csv\"),[Delimiter=\";\", Columns=3, Encoding=1250, QuoteStyle=QuoteStyle.None]),",
           "    #\"Zmieniono typ\" = Table.TransformColumnTypes(Źródło,{{\"Column1\", type text}, {\"Column2\", type text}, {\"Column3\", type text}}),",
           "    #\"Nagłówki o podwyższonym poziomie\" = Table.PromoteHeaders(#\"Zmieniono typ\", [PromoteAllScalars=true]),",
           "    #\"Zmieniono typ1\" = Table.TransformColumnTypes(#\"Nagłówki o podwyższonym poziomie\",{{\"Color\", type text}, {\"Background Color Format\", type text}, {\"Font Color Format\", type text}})",
@@ -420,7 +420,7 @@
             "source": {
               "expression": [
                 "let",
-                "    Źródło = Sql.Databases(\"localhost\"),",
+                "    Źródło = Sql.Databases(\"JANKO\"),",
                 "    WideWorldImportersDW = Źródło{[Name=\"WideWorldImportersDW\"]}[Data],",
                 "    Dimension_City = WideWorldImportersDW{[Schema=\"Dimension\",Item=\"City\"]}[Data],",
                 "    #\"Usunięto pierwsze wiersze\" = Table.Skip(Dimension_City,1),",
@@ -616,7 +616,7 @@
             "source": {
               "expression": [
                 "let",
-                "    Źródło = Sql.Databases(\"localhost\"),",
+                "    Źródło = Sql.Databases(\"JANKO\"),",
                 "    WideWorldImportersDW = Źródło{[Name=\"WideWorldImportersDW\"]}[Data],",
                 "    Dimension_Customer = WideWorldImportersDW{[Schema=\"Dimension\",Item=\"Customer\"]}[Data],",
                 "    #\"Usunięto pierwsze wiersze\" = Table.Skip(Dimension_Customer,1),",
@@ -914,6 +914,21 @@
             "lineageTag": "bbd1a115-866f-445b-9085-8989ad7657ed",
             "sourceColumn": "ISO Week Number",
             "summarizeBy": "sum"
+          },
+          {
+            "name": "Quarter",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "expression": "\"Q\" & QUARTER(DimDate[Date])",
+            "isDataTypeInferred": true,
+            "lineageTag": "5cff869c-6986-4043-ad8f-61a69ff2a333",
+            "summarizeBy": "none",
+            "type": "calculated"
           }
         ],
         "dataCategory": "Time",
@@ -928,16 +943,22 @@
                 "ordinal": 0
               },
               {
+                "name": "Quarter",
+                "column": "Quarter",
+                "lineageTag": "3cf87b66-9a9c-4921-83e1-18b3c3797b46",
+                "ordinal": 1
+              },
+              {
                 "name": "Month",
                 "column": "Month",
                 "lineageTag": "e20860f0-7589-4642-9c9f-97f327bef130",
-                "ordinal": 1
+                "ordinal": 2
               },
               {
                 "name": "Date",
                 "column": "Date",
                 "lineageTag": "fd52e4e6-7ed3-471d-85ba-80b79ad5596e",
-                "ordinal": 2
+                "ordinal": 3
               }
             ],
             "lineageTag": "3446cada-cfe7-4a25-993a-d6838daf443b"
@@ -951,7 +972,7 @@
             "source": {
               "expression": [
                 "let",
-                "    Źródło = Sql.Databases(\"localhost\"),",
+                "    Źródło = Sql.Databases(\"JANKO\"),",
                 "    WideWorldImportersDW = Źródło{[Name=\"WideWorldImportersDW\"]}[Data],",
                 "    Dimension_Date = WideWorldImportersDW{[Schema=\"Dimension\",Item=\"Date\"]}[Data]",
                 "in",
@@ -1138,7 +1159,7 @@
             "source": {
               "expression": [
                 "let",
-                "    Źródło = Sql.Databases(\"localhost\"),",
+                "    Źródło = Sql.Databases(\"JANKO\"),",
                 "    WideWorldImportersDW = Źródło{[Name=\"WideWorldImportersDW\"]}[Data],",
                 "    Dimension_Employee = WideWorldImportersDW{[Schema=\"Dimension\",Item=\"Employee\"]}[Data],",
                 "    #\"Przefiltrowano wiersze\" = Table.SelectRows(Dimension_Employee, each ([Is Salesperson] = true)),",
@@ -1320,7 +1341,7 @@
             "source": {
               "expression": [
                 "let",
-                "    Źródło = Sql.Databases(\"localhost\"),",
+                "    Źródło = Sql.Databases(\"JANKO\"),",
                 "    WideWorldImportersDW = Źródło{[Name=\"WideWorldImportersDW\"]}[Data],",
                 "    #\"Dimension_Stock Item\" = WideWorldImportersDW{[Schema=\"Dimension\",Item=\"Stock Item\"]}[Data],",
                 "    #\"Usunięto pierwsze wiersze\" = Table.Skip(#\"Dimension_Stock Item\",1),",
@@ -1704,7 +1725,7 @@
             "source": {
               "expression": [
                 "let",
-                "    Źródło = Sql.Databases(\"localhost\"),",
+                "    Źródło = Sql.Databases(\"JANKO\"),",
                 "    WideWorldImportersDW = Źródło{[Name=\"WideWorldImportersDW\"]}[Data],",
                 "    Fact_Sale = WideWorldImportersDW{[Schema=\"Fact\",Item=\"Sale\"]}[Data],",
                 "    #\"Usunięto inne kolumny\" = Table.SelectColumns(Fact_Sale,{\"Sale Key\", \"City Key\", \"Customer Key\", \"Stock Item Key\", \"Invoice Date Key\", \"Delivery Date Key\", \"Salesperson Key\", \"WWI Invoice ID\", \"Quantity\", \"Unit Price\", \"Tax Rate\", \"Total Excluding Tax\", \"Tax Amount\", \"Profit\", \"Total Including Tax\"}),",
@@ -1812,7 +1833,7 @@
             "source": {
               "expression": [
                 "let",
-                "    Źródło = Csv.Document(File.Contents(\"C:\\Users\\kubal\\Desktop\\Matma\\Wizualizacja danych i BI\\Dodatkowe dane\\SalespersonTargets.csv\"),[Delimiter=\";\", Columns=14, Encoding=1250, QuoteStyle=QuoteStyle.None]),",
+                "    Źródło = Csv.Document(File.Contents(\"C:\\Users\\janek\\OneDrive\\Pulpit\\PowerBI\\Project\\data\\SalespersonTargets.csv\"),[Delimiter=\";\", Columns=14, Encoding=1250, QuoteStyle=QuoteStyle.None]),",
                 "    #\"Nagłówki o podwyższonym poziomie\" = Table.PromoteHeaders(Źródło, [PromoteAllScalars=true]),",
                 "    #\"Zmieniono typ\" = Table.TransformColumnTypes(#\"Nagłówki o podwyższonym poziomie\",{{\"Year\", Int64.Type}, {\"EmployeeID\", Int64.Type}, {\"M01\", Int64.Type}, {\"M02\", Int64.Type}, {\"M03\", Int64.Type}, {\"M04\", Int64.Type}, {\"M05\", Int64.Type}, {\"M06\", Int64.Type}, {\"M07\", Int64.Type}, {\"M08\", Int64.Type}, {\"M09\", Int64.Type}, {\"M10\", Int64.Type}, {\"M11\", Int64.Type}, {\"M12\", Int64.Type}}),",
                 "    #\"Anulowano przestawienie innych kolumn\" = Table.UnpivotOtherColumns(#\"Zmieniono typ\", {\"Year\", \"EmployeeID\"}, \"Atrybut\", \"Wartość\"),",
@@ -1918,7 +1939,7 @@
             "source": {
               "expression": [
                 "let",
-                "    Źródło = Csv.Document(File.Contents(\"C:\\Users\\kubal\\Desktop\\Matma\\Wizualizacja danych i BI\\Dodatkowe dane\\Employee_csv.csv\"),[Delimiter=\";\", Columns=5, Encoding=65001, QuoteStyle=QuoteStyle.None]),",
+                "    Źródło = Csv.Document(File.Contents(\"C:\\Users\\janek\\OneDrive\\Pulpit\\PowerBI\\Project\\data\\Employee_csv.csv\"),[Delimiter=\";\", Columns=5, Encoding=65001, QuoteStyle=QuoteStyle.None]),",
                 "    #\"Nagłówki o podwyższonym poziomie\" = Table.PromoteHeaders(Źródło, [PromoteAllScalars=true]),",
                 "    #\"Zmieniono typ\" = Table.TransformColumnTypes(#\"Nagłówki o podwyższonym poziomie\",{{\"WWI Employee ID\", Int64.Type}, {\"Employee\", type text}, {\"JobTitle\", type text}, {\"BusinessUnit\", type text}, {\"Age\", Int64.Type}})",
                 "in",
@@ -2015,7 +2036,7 @@
             "source": {
               "expression": [
                 "let",
-                "    Źródło = Excel.Workbook(File.Contents(\"C:\\Users\\kubal\\Desktop\\Matma\\Wizualizacja danych i BI\\Dodatkowe dane\\Category_dictionary.xlsx\"), null, true),",
+                "    Źródło = Excel.Workbook(File.Contents(\"C:\\Users\\janek\\OneDrive\\Pulpit\\PowerBI\\Project\\data\\Category_dictionary.xlsx\"), null, true),",
                 "    Arkusz1_Sheet = Źródło{[Item=\"Arkusz1\",Kind=\"Sheet\"]}[Data],",
                 "    #\"Nagłówki o podwyższonym poziomie\" = Table.PromoteHeaders(Arkusz1_Sheet, [PromoteAllScalars=true]),",
                 "    #\"Zmieniono typ\" = Table.TransformColumnTypes(#\"Nagłówki o podwyższonym poziomie\",{{\"WWI Stock Item ID\", Int64.Type}, {\"Description\", type text}, {\"Category\", type text}})",
@@ -2315,6 +2336,51 @@
             "name": "Categorize w.r.t. Quantity",
             "expression": "SWITCH(TRUE(), [Total Quantity] > 500000, \"Very High\", [Total Quantity] > 100000, \"High\", [Total Quantity] > 50000, \"Medium\", \"Low\")",
             "lineageTag": "81661807-c7a6-4529-96ed-b1eb4a05d5ba"
+          },
+          {
+            "name": "Top Customer Name",
+            "expression": [
+              "",
+              "VAR TopCustomer =",
+              "    TOPN(1, ALL('DimCustomer'), [Total Profit], DESC)",
+              "RETURN",
+              "    MAXX(TopCustomer, 'DimCustomer'[Customer])"
+            ],
+            "lineageTag": "2700c06a-b31e-46bc-a8fb-b4091ac504a3"
+          },
+          {
+            "name": "Top Customer Total Profit",
+            "annotations": [
+              {
+                "name": "PBI_FormatHint",
+                "value": "{\"isGeneralNumber\":true}"
+              }
+            ],
+            "expression": [
+              "",
+              "VAR TopCustomer =",
+              "    TOPN(1, ALL('DimCustomer'), [Total Profit], DESC)",
+              "RETURN",
+              "    MAXX(TopCustomer, [Total Profit])"
+            ],
+            "lineageTag": "8ac2dbf2-c84c-42e3-aada-c152da844b0f"
+          },
+          {
+            "name": "Num of products",
+            "expression": "SUM(FactSales[Quantity])",
+            "formatString": "0",
+            "lineageTag": "f2953426-897e-4c45-87fd-615f755aed6b"
+          },
+          {
+            "name": "Products per transaction",
+            "annotations": [
+              {
+                "name": "PBI_FormatHint",
+                "value": "{\"isGeneralNumber\":true}"
+              }
+            ],
+            "expression": "SUM(FactSales[Quantity]) / COUNT(FactSales[Quantity])",
+            "lineageTag": "babca02c-e1b5-4fa9-8772-a2e98298ceb4"
           }
         ],
         "partitions": [
