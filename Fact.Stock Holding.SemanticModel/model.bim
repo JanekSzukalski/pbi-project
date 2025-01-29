@@ -1244,6 +1244,16 @@
       },
       {
         "name": "Fact.Stock_Holding",
+        "annotations": [
+          {
+            "name": "PBI_NavigationStepName",
+            "value": "Nawigacja"
+          },
+          {
+            "name": "PBI_ResultType",
+            "value": "Table"
+          }
+        ],
         "columns": [
           {
             "name": "Stock Holding Key",
@@ -1346,20 +1356,6 @@
             "summarizeBy": "sum"
           },
           {
-            "name": "Target Stock Level",
-            "annotations": [
-              {
-                "name": "SummarizationSetBy",
-                "value": "Automatic"
-              }
-            ],
-            "dataType": "int64",
-            "formatString": "0",
-            "lineageTag": "b497d679-6f12-454d-ae8d-35f106d716ab",
-            "sourceColumn": "Target Stock Level",
-            "summarizeBy": "sum"
-          },
-          {
             "name": "Lineage Key",
             "annotations": [
               {
@@ -1372,16 +1368,30 @@
             "lineageTag": "9431f9c1-ee60-4c05-8715-48cac2f00dbf",
             "sourceColumn": "Lineage Key",
             "summarizeBy": "count"
+          },
+          {
+            "name": "Target Stock Level",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "int64",
+            "formatString": "0",
+            "lineageTag": "9d0edb8f-061c-4ca9-9999-a9d0ec86c6bf",
+            "sourceColumn": "Target Stock Level",
+            "summarizeBy": "sum"
           }
         ],
         "lineageTag": "7fab8090-6716-4b20-8854-c27324e9a84c",
         "measures": [
           {
-            "name": "TotalCostPricePerProduct",
+            "name": "Total Cost",
             "annotations": [
               {
                 "name": "PBI_FormatHint",
-                "value": "{\"isGeneralNumber\":true}"
+                "value": "{\"currencyCulture\":\"en-US\"}"
               }
             ],
             "changedProperties": [
@@ -1403,31 +1413,44 @@
                 }
               }
             ],
+            "formatString": "\\$#,0;(\\$#,0);\\$#,0",
             "lineageTag": "c4d4a570-74a0-4dc5-b434-4fa78589aaf9"
           },
           {
             "name": "Current level",
             "expression": "SUM('Fact.Stock_Holding'[Quantity On Hand]) ",
-            "formatString": "0",
+            "formatString": "#,0",
             "lineageTag": "8cd3dfc9-7d08-41b0-9eba-c7952cf047c0"
           },
           {
             "name": "Inventory level",
             "expression": "SUM('Fact.Stock_Holding'[Last Stocktake Quantity])",
-            "formatString": "0",
+            "formatString": "#,0",
             "lineageTag": "98fcae9e-3aac-4fbc-a00c-9de5c6456bcc"
           },
           {
             "name": "Reorder level",
             "expression": "SUM('Fact.Stock_Holding'[Reorder Level_]) ",
-            "formatString": "0",
+            "formatString": "#,0",
             "lineageTag": "0444aef0-66ac-4d57-809a-2d516a3f82b0"
           },
           {
             "name": "Target level",
             "expression": "SUM('Fact.Stock_Holding'[Target Stock Level])",
-            "formatString": "0",
+            "formatString": "#,0",
             "lineageTag": "d617a827-e105-488d-b73b-d92da925a5b1"
+          },
+          {
+            "name": "Surplus",
+            "expression": "[Current level] - [Target level]",
+            "formatString": "#,0",
+            "lineageTag": "bab99f80-b5c2-4945-ac93-84dca39aff7c"
+          },
+          {
+            "name": "Difference",
+            "expression": "[Current level] - [Inventory level]",
+            "formatString": "0",
+            "lineageTag": "67523523-0d69-4d70-99cf-7e54660e38e2"
           }
         ],
         "partitions": [
@@ -1440,9 +1463,20 @@
                 "    Źródło = Sql.Databases(\"localhost\"),",
                 "    WideWorldImportersDW = Źródło{[Name=\"WideWorldImportersDW\"]}[Data],",
                 "    #\"Fact_Stock Holding\" = WideWorldImportersDW{[Schema=\"Fact\",Item=\"Stock Holding\"]}[Data],",
-                "    #\"Zmieniono nazwy kolumn\" = Table.RenameColumns(#\"Fact_Stock Holding\",{{\"Reorder Level\", \"Reorder Level_\"}, {\"Bin Location\", \"Location\"}})",
+                "    #\"Zmieniono nazwy kolumn\" = Table.RenameColumns(#\"Fact_Stock Holding\",{{\"Reorder Level\", \"Reorder Level_\"}, {\"Bin Location\", \"Location\"}}),",
+                "    #\"Wstawiono mnożenie\" = Table.AddColumn(#\"Zmieniono nazwy kolumn\", \"Target Stock Level_\", each [Target Stock Level] * 1000, type number),",
+                "    #\"Usunięto kolumny\" = Table.RemoveColumns(#\"Wstawiono mnożenie\",{\"Target Stock Level\"}),",
+                "    #\"Zmieniono nazwy kolumn1\" = Table.RenameColumns(#\"Usunięto kolumny\",{{\"Target Stock Level_\", \"Target Stock Level\"}}),",
+                "    #\"Zmieniono typ\" = Table.TransformColumnTypes(#\"Zmieniono nazwy kolumn1\",{{\"Target Stock Level\", Int64.Type}}),",
+                "    #\"Zmieniono kolejność kolumn\" = Table.ReorderColumns(#\"Zmieniono typ\",{\"Stock Holding Key\", \"Stock Item Key\", \"Quantity On Hand\", \"Location\", \"Last Stocktake Quantity\", \"Last Cost Price\", \"Reorder Level_\", \"Target Stock Level\", \"Lineage Key\", \"Dimension.Stock Item\"}),",
+                "    #\"Wstawiono mnożenie1\" = Table.AddColumn(#\"Zmieniono kolejność kolumn\", \"Reorder Level\", each [Reorder Level_] * 1000, type number),",
+                "    #\"Zmieniono kolejność kolumn1\" = Table.ReorderColumns(#\"Wstawiono mnożenie1\",{\"Stock Holding Key\", \"Stock Item Key\", \"Quantity On Hand\", \"Location\", \"Last Stocktake Quantity\", \"Last Cost Price\", \"Reorder Level_\", \"Reorder Level\", \"Target Stock Level\", \"Lineage Key\", \"Dimension.Stock Item\"}),",
+                "    #\"Usunięto kolumny1\" = Table.RemoveColumns(#\"Zmieniono kolejność kolumn1\",{\"Reorder Level_\"}),",
+                "    #\"Zmieniono typ1\" = Table.TransformColumnTypes(#\"Usunięto kolumny1\",{{\"Reorder Level\", Int64.Type}}),",
+                "    #\"Zmieniono nazwy kolumn2\" = Table.RenameColumns(#\"Zmieniono typ1\",{{\"Reorder Level\", \"Reorder Level_\"}}),",
+                "    #\"Przefiltrowano wiersze\" = Table.SelectRows(#\"Zmieniono nazwy kolumn2\", each ([Last Cost Price] <> 0))",
                 "in",
-                "    #\"Zmieniono nazwy kolumn\""
+                "    #\"Przefiltrowano wiersze\""
               ],
               "type": "m"
             }
